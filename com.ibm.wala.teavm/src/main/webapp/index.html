@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" charset="utf-8" src="teavm/runtime.js"></script>
+    <script type="text/javascript" charset="utf-8" src="teavm/classes.js"></script>
+<script>
+function id_test(x) {
+  return x;
+}
+
+function write(x) {
+  document.getElementById("graph").innerText = x;
+}
+
+var graph;
+function makeGraph(json) {
+   json.size = json.length; 
+   return solver(json);
+}
+function setGraph(G) {
+  graph = G;
+  write(G);
+}
+
+function lca(a, b) {
+  document.getElementById("ancestor").value = parent(graph, Object, a, b);  
+}
+  
+function cb(a, b) {
+  callback(graph, function() { console.log(this); });  
+}
+  
+function colors() {
+  document.getElementById("colors").value = color(graph);  
+}
+
+var callback;
+var parent;
+var color;
+var solver;
+var theConstraints = [
+ { sub: String, super: Object }, 
+ { sub: Function, super: Object }, 
+ { sub: Array, super: Function },
+ { sub: Number, super: Object },
+ { sub: "Temperature", super: Number }, 
+ { sub: "Celsius", super: "Temperature" }, 
+ { sub: "Farenheit", super: "Temperature" }
+];
+theConstraints.size = 7;
+
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr, len;
+  if (this.length === 0) return hash;
+  for (i = 0, len = this.length; i < len; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+Object.prototype.hashCode = function() {
+  return this.toSource().hashCode();
+}
+</script>
+  </head>
+  <body onload="main()">
+
+  <button id="solveNodes">Solve nodes only</button>
+  <button id="solveNodesAndEdges">Solve nodes and edges</button>
+  <hr>
+
+  <textarea rows="15" cols="50" id="graph_data"></textarea>
+  <br>
+  <button id="make_graph" onclick="setGraph(makeGraph(eval(document.getElementById('graph_data').value)))">make graph</button>
+  <hr>
+
+  <textarea rows="1" cols="20" id="left"></textarea><textarea rows="1" cols="20" id="right"></textarea><br>
+  <button id="lca" onclick="lca(eval(document.getElementById('left').value), eval(document.getElementById('right').value))">least common ancestor</button><br>
+  <textarea rows="4" cols="20" id="ancestor"></textarea>
+  <hr/>
+
+  <button id="lca" onclick="colors()">color graph</button><br>
+  <textarea rows="4" cols="20" id="colors"></textarea>
+  <hr/>
+
+  <textarea rows=" 1" cols="20" id="funbox"></textarea><textarea rows="1" cols="20" id="obj"></textarea><br>
+  <button id="cbb" onclick="cb(eval(document.getElementById('funbox').value), eval(document.getElementById('obj').value))">callback</button><br>
+  <textarea rows="4" cols="20" id="result"></textarea>
+  <hr/>
+
+
+<div id="graph">
+ <em>current graph</em>
+</div>
+
+</body>
+</html>

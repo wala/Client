@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+web-client/cacheDirectory=${workspace_loc\:/com.ibm.wala.teamvm}/target/teavm-cache
+web-client/copySources=true
+web-client/debugInformation=true
+web-client/enabled=true
+web-client/externalTool=teavm-eclipse-m2e-plugin.tool
+web-client/incremental=false
+web-client/mainClass=com.ibm.wala.teamvm.Client
+web-client/minifying=true
+web-client/runtime=SEPARATE
+web-client/sourceMaps=true
+web-client/targetDirectory=${workspace_loc\:/com.ibm.wala.teamvm}/target/generated/js/teavm
+web-client/targetFileName=classes.js
