@@ -29,7 +29,9 @@ function lca(a, b) {
 }
   
 function cb(a, b) {
-  callback(graph, function() { console.log(this); });  
+  var x = [];
+  callback(graph, function() { x.push(this.toString()); });
+  console.log(x);
 }
   
 function colors() {
@@ -40,6 +42,7 @@ var callback;
 var parent;
 var color;
 var solver;
+var foreach;
 var theConstraints = [
  { sub: String, super: Object }, 
  { sub: Function, super: Object }, 
