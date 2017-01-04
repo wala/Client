@@ -1,4 +1,4 @@
-package com.ibm.wala.teavm;
+package com.ibm.wala.teavm.bridge;
 
 import org.teavm.jso.JSObject;
 

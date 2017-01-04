@@ -1,4 +1,4 @@
-package com.ibm.wala.teavm;
+package com.ibm.wala.teavm.bridge;
 
 public class JSWrapper {
 	private final Hashable obj;
