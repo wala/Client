@@ -62,14 +62,7 @@ public class Client {
 
 		setSolver((Constraints system) -> {
 			SlowSparseNumberedGraph<JSWrapper> G = SlowSparseNumberedGraph.make();	
-			for(int i = 0; i < system.getSize(); i++) {
-				Constraint c = system.constraint(i);
-				JSWrapper sub = new JSWrapper(c.getSub());
-				if (! G.containsNode(sub)) { G.addNode(sub); }
-				JSWrapper sup = new JSWrapper(c.getSuper());
-				if (! G.containsNode(sup)) { G.addNode(sup); }
-				G.addEdge(sup, sub);
-			}
+			copy(system, G);
 
 			new WelshPowell<JSWrapper>().color(G).toString();
 
@@ -101,6 +94,18 @@ public class Client {
 		});
 
 		WalaUtilTests.walaUtilTests();
+	}
+
+
+	public static void copy(Constraints system, Graph<JSWrapper> G) {
+		for(int i = 0; i < system.getSize(); i++) {
+			Constraint c = system.constraint(i);
+			JSWrapper sub = new JSWrapper(c.getSub());
+			if (! G.containsNode(sub)) { G.addNode(sub); }
+			JSWrapper sup = new JSWrapper(c.getSuper());
+			if (! G.containsNode(sup)) { G.addNode(sup); }
+			G.addEdge(sup, sub);
+		}
 	}
 
 
