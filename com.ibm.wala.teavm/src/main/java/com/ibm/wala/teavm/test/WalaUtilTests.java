@@ -1,5 +1,9 @@
 package com.ibm.wala.teavm.test;
 
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSObject;
+
 import com.ibm.wala.core.tests.basic.ExtensionGraphTest;
 import com.ibm.wala.core.tests.basic.FloydWarshallTest;
 import com.ibm.wala.core.tests.basic.GraphDataflowTest;
@@ -15,62 +19,71 @@ import de.iterable.teavm.jso.browser.Console;
 
 public class WalaUtilTests {
 	
-	public static void walaUtilTests() {
-		runTest(() -> { (new ExtensionGraphTest()).testAugment(); });
-		runTest(() -> { (new FloydWarshallTest()).TestPathLengths(); });
-		runTest(() -> { (new FloydWarshallTest()).TestShortestPath(); });
-		runTest(() -> { (new FloydWarshallTest()).TestShortestPaths(); });
-		runTest(() -> { (new GraphDataflowTest()).testSolverNodeOnly(); });
-		runTest(() -> { (new GraphDataflowTest()).testSolverNodeEdge(); });
-		runTest(() -> { (new OrdinalSetTest()).test1(); });
-		runTest(() -> { (new PathFinderTest()).testPaths1(); });
-		runTest(() -> { (new PathFinderTest()).testPaths2(); });
-		runTest(() -> { (new PathFinderTest()).testPaths3(); });
-		runTest(() -> { (new PathFinderTest()).testPaths4(); });
-		runTest(() -> { (new PrimitivesTest()).testBFSPathFinder(); });
-		runTest(() -> { (new PrimitivesTest()).testBimodalMap(); });
-		runTest(() -> { (new PrimitivesTest()).testBimodalMutableSparseIntSet(); });
-		runTest(() -> { (new PrimitivesTest()).testBinaryIntegerRelation(); });
-		runTest(() -> { (new PrimitivesTest()).testBitVector(); });
-		runTest(() -> { (new PrimitivesTest()).testBitVectorIntSet(); });
-		runTest(() -> { (new PrimitivesTest()).testBitVectors(); });
-		runTest(() -> { (new PrimitivesTest()).testBoundedBFS(); });
-		runTest(() -> { (new PrimitivesTest()).testDominatorsA(); });
-		runTest(() -> { (new PrimitivesTest()).testMutableSharedBitVectorIntSet(); });
-		runTest(() -> { (new PrimitivesTest()).testMutableSparseIntSet(); });
-		// runTest(() -> { (new PrimitivesTest()).testMutableSparseLongSet(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVector0_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVector100_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVector10_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVector50_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVector50_50(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVectors100_200_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVectors100_25_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVectors150_10(); });
-		runTest(() -> { (new PrimitivesTest()).testOffsetBitVectors35_25_20_10(); });
-		runTest(() -> { (new PrimitivesTest()).testSemiSparseMutableIntSet(); });
-		runTest(() -> { (new PrimitivesTest()).testSmallMap(); });
-		runTest(() -> { (new PrimitivesTest()).testSpecificBugsInOffsetBitVectors(); });
-		runTest(() -> { (new PrimitivesTest()).testSpecificBugsInSemiSparseMutableIntSets(); });
-		runTest(() -> { (new PrimitivesTest()).testUnionFind(); });
-		runTest(() -> { (new WelshPowellTest()).testOne(); });
-		runTest(() -> { (new WelshPowellTest()).testTwo(); });
-		runTest(() -> { (new SemiSparseMutableIntSetTest()).testCase1(); });
-		runTest(() -> { (new TwoLevelVectorTest()).testCase1(); });
-	}
-
-	private interface Test {
+	private interface Test extends JSObject {
 		void test() throws CancelException;
 	}
 
-	private static void runTest(Test test) {
+	@JSBody(params = { "test" }, script = "walaUnitTests[ walaUnitTests.length ] = test;")
+	private static native void installTest(Test test);
+	
+	@JSFunctor
+	private interface TestRunner extends JSObject {
+		boolean runTest(Test test) throws CancelException;
+	}
+
+	@JSBody(params = { "runner" }, script = "testRunner = runner;")
+	private static native void installTestRunner(TestRunner runner);
+
+	public WalaUtilTests() {
+		installTest(() -> { (new ExtensionGraphTest()).testAugment(); });
+		installTest(() -> { (new FloydWarshallTest()).TestPathLengths(); });
+		installTest(() -> { (new FloydWarshallTest()).TestShortestPath(); });
+		installTest(() -> { (new FloydWarshallTest()).TestShortestPaths(); });
+		installTest(() -> { (new GraphDataflowTest()).testSolverNodeOnly(); });
+		installTest(() -> { (new GraphDataflowTest()).testSolverNodeEdge(); });
+		installTest(() -> { (new OrdinalSetTest()).test1(); });
+		installTest(() -> { (new PathFinderTest()).testPaths1(); });
+		installTest(() -> { (new PathFinderTest()).testPaths2(); });
+		installTest(() -> { (new PathFinderTest()).testPaths3(); });
+		installTest(() -> { (new PathFinderTest()).testPaths4(); });
+		installTest(() -> { (new PrimitivesTest()).testBFSPathFinder(); });
+		installTest(() -> { (new PrimitivesTest()).testBimodalMap(); });
+		installTest(() -> { (new PrimitivesTest()).testBimodalMutableSparseIntSet(); });
+		installTest(() -> { (new PrimitivesTest()).testBinaryIntegerRelation(); });
+		installTest(() -> { (new PrimitivesTest()).testBitVector(); });
+		installTest(() -> { (new PrimitivesTest()).testBitVectorIntSet(); });
+		installTest(() -> { (new PrimitivesTest()).testBitVectors(); });
+		installTest(() -> { (new PrimitivesTest()).testBoundedBFS(); });
+		installTest(() -> { (new PrimitivesTest()).testDominatorsA(); });
+		installTest(() -> { (new PrimitivesTest()).testMutableSharedBitVectorIntSet(); });
+		installTest(() -> { (new PrimitivesTest()).testMutableSparseIntSet(); });
+		installTest(() -> { (new PrimitivesTest()).testMutableSparseLongSet(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector0_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector100_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector10_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector50_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector50_50(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVectors100_200_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVectors100_25_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVectors150_10(); });
+		installTest(() -> { (new PrimitivesTest()).testOffsetBitVectors35_25_20_10(); });
+		installTest(() -> { (new PrimitivesTest()).testSemiSparseMutableIntSet(); });
+		installTest(() -> { (new PrimitivesTest()).testSmallMap(); });
+		installTest(() -> { (new PrimitivesTest()).testSpecificBugsInOffsetBitVectors(); });
+		installTest(() -> { (new PrimitivesTest()).testSpecificBugsInSemiSparseMutableIntSets(); });
+		installTest(() -> { (new PrimitivesTest()).testUnionFind(); });
+		installTest(() -> { (new WelshPowellTest()).testOne(); });
+		installTest(() -> { (new WelshPowellTest()).testTwo(); });
+		installTest(() -> { (new SemiSparseMutableIntSetTest()).testCase1(); });
+		installTest(() -> { (new TwoLevelVectorTest()).testCase1(); });
+	
+		installTestRunner((Test test) -> { return runTest(test); });
+	}
+
+	private static boolean runTest(Test test) throws CancelException {
 		Console.log("running " + test.getClass().getName());
-		try {
 			test.test();
-		} catch (Throwable e) {
-			Console.log("teat failed with " + e.toString());
-			e.printStackTrace();
-		}
+			return true;
 	}
 
 }

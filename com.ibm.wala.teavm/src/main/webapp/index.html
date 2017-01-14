@@ -38,6 +38,18 @@ function colors() {
   document.getElementById("colors").value = color(graph);  
 }
 
+function run_test(i) {
+  console.log(i); 
+  console.log(walaUnitTests[i]);  
+  console.log(walaUnitTests.length);  
+console.log(testRunner);  
+console.log(testRunner(walaUnitTests[i]));  
+  document.getElementById("test").value = testRunner(walaUnitTests[i]);  
+}
+
+var walaUnitTests = [];
+var testRunner;
+
 var callback;
 var parent;
 var color;
@@ -80,7 +92,6 @@ Object.prototype.hashCode = function() {
   <br>
   <button id="make_graph" onclick="setGraph(makeGraph(eval(document.getElementById('graph_data').value)))">make graph</button>
   <hr>
-
   <textarea rows="1" cols="20" id="left"></textarea><textarea rows="1" cols="20" id="right"></textarea><br>
   <button id="lca" onclick="lca(eval(document.getElementById('left').value), eval(document.getElementById('right').value))">least common ancestor</button><br>
   <textarea rows="4" cols="20" id="ancestor"></textarea>
@@ -93,7 +104,12 @@ Object.prototype.hashCode = function() {
   <textarea rows=" 1" cols="20" id="funbox"></textarea><textarea rows="1" cols="20" id="obj"></textarea><br>
   <button id="cbb" onclick="cb(eval(document.getElementById('funbox').value), eval(document.getElementById('obj').value))">callback</button><br>
   <textarea rows="4" cols="20" id="result"></textarea>
+
+  <textarea rows="1" cols="20" id="test"></textarea>
+  <button id="runTest" onclick="run_test(eval(document.getElementById('test').value))">run test</button><br>
   <hr/>
+
+<hr/>
 
 
 <div id="graph">

@@ -93,7 +93,7 @@ public class Client {
 			}
 		});
 
-		WalaUtilTests.walaUtilTests();
+		new WalaUtilTests();
 	}
 
 
