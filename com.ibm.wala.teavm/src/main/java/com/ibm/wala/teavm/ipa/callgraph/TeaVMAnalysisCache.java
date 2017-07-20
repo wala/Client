@@ -43,7 +43,7 @@ public class TeaVMAnalysisCache implements IAnalysisCacheView {
 			return irFactory.makeIR(method, context, ssaOptions);
 		}
 
-		@Override
+		//@Override
 		public void clear() {
 			// TODO Auto-generated method stub
 			
