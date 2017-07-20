@@ -1,0 +1,20 @@
+language: java
+jdk: oraclejdk8
+addons:
+  apt:
+    packages:
+    - lighttpd
+  sauce_connect:
+    username: juliandolby
+  jwt:
+    secure: "O9aASPNiIb7EEQ4kMKGr+SPYU0ymCWtmUImLXz3PWB/x/ErohVYITboxjujdPaEFxxNr+gZEFGy7oMkoGqXPwwuhNMUU115BosEJ4+1Q+f5rhHh4HczRVJOURTDZ2EtyNmmUpQuQVm6xNgfMZtAM5g4G410PpHoaBUGP8a/JHUNP6Pu78McvyRH88nYcs7j4hP64a+dFW22PSoIqPld7q5XJElxs3jImJcYZ6hcdu8rdWfq8/c/ZyxCABFboQ4tpY/tCrJ+77KUVuFeXaTcz85Y76cuAu3K6mI1hUues1OgEhlvHNAes3SNU26eA61zbjFEb6WN9IIT9lYzusSXkDuxKmjMl/TCvfukolxbSH2SNeSI8auTtomh5GYMvB3eL7qR5UEws16KxxfAWR8K0TwPAvZ2vBfUYTBUoYsJwnRmWUOGJ2UBC0EZE1y9me0sC5NpQC1GFaxvFvHEpBaRPJgtcxMb5aDYWzzMiKhYiBtLlruuxzW7mvsiTDpsj1ulPorAxqJri3zb2LGr/jsgyquPpwfvFEbjql/jigvMiVsRHDDzMOMrQXIM9oosYmoYt5pao3JB0g8mjfWREUzjYbhLsqeSaoUJ2a3EllUugu7/3BGoU8AEfJ10GMFRtYERCc+z/HYA+x9betlPir3XOIw2Kfe9bbj+7PeQGwQ4QZ88=">
+before_install:
+ - git clone https://github.com/wala/WALA /tmp/WALA
+install:
+ - pushd /tmp/WALA
+ - mvn clean install -DskipTests -B -q
+ - popd
+ - lighttpd -f travis-lighttpd.conf
+script:
+ - mvn clean install
+sudo: false

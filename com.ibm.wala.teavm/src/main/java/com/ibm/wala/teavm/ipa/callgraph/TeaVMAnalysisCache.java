@@ -10,7 +10,7 @@ import com.ibm.wala.ssa.IRFactory;
 import com.ibm.wala.ssa.SSAOptions;
 
 public class TeaVMAnalysisCache implements IAnalysisCacheView {
-		private final IRFactory irFactory;
+		private final IRFactory<IMethod> irFactory;
 		private final SSAOptions ssaOptions;
 		
 		public TeaVMAnalysisCache(IRFactory<IMethod> irFactory, SSAOptions ssaOptions) {
@@ -41,5 +41,11 @@ public class TeaVMAnalysisCache implements IAnalysisCacheView {
 		@Override
 		public IR getIR(IMethod method, Context context) {
 			return irFactory.makeIR(method, context, ssaOptions);
+		}
+
+		@Override
+		public void clear() {
+			// TODO Auto-generated method stub
+			
 		}
 	}

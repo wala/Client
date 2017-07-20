@@ -57,7 +57,7 @@ public class WalaUtilTests {
 		installTest(() -> { (new PrimitivesTest()).testDominatorsA(); });
 		installTest(() -> { (new PrimitivesTest()).testMutableSharedBitVectorIntSet(); });
 		installTest(() -> { (new PrimitivesTest()).testMutableSparseIntSet(); });
-		installTest(() -> { (new PrimitivesTest()).testMutableSparseLongSet(); });
+		// installTest(() -> { (new PrimitivesTest()).testMutableSparseLongSet(); });
 		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector0_10(); });
 		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector100_10(); });
 		installTest(() -> { (new PrimitivesTest()).testOffsetBitVector10_10(); });
