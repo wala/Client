@@ -40,7 +40,7 @@ public class WalaUtilTest {
 	    driver = new RemoteWebDriver(new URL(URL), caps);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		driver.get("http://localhost:8899");
+		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/");
 	}
 
 	@AfterClass
