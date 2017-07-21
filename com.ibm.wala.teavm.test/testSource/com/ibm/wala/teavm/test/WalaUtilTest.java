@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -44,9 +45,13 @@ public class WalaUtilTest {
 	    driver = new RemoteWebDriver(new URL(URL), caps);*/
 		
 		driver = new PhantomJSDriver();
-
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				
+		
+		Dimension d = driver.manage().window().getSize();	
+		new Dimension(Math.max(1024, d.getHeight()), Math.max(1024, d.getWidth()));
+		driver.manage().window().setSize(d);
+		
 		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
 	}
 
