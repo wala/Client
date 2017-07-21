@@ -15,6 +15,7 @@ install:
  - mvn clean install -DskipTests -B -q
  - popd
  - lighttpd -f ./travis-lighttpd.conf
+ - wget http://localhost:8899/index.html
 script:
  - mvn clean install
 sudo: false
