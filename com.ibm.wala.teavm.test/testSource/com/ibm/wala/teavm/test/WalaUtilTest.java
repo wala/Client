@@ -1,7 +1,6 @@
 package com.ibm.wala.teavm.test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -16,10 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 @RunWith(Parameterized.class)
 public class WalaUtilTest {
@@ -48,9 +44,7 @@ public class WalaUtilTest {
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		Dimension d = driver.manage().window().getSize();	
-		new Dimension(Math.max(1024, d.getHeight()), Math.max(1024, d.getWidth()));
-		driver.manage().window().setSize(d);
+		driver.manage().window().setSize(new Dimension(2048, 2048));
 		
 		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
 	}
@@ -78,7 +72,7 @@ public class WalaUtilTest {
 
 	@Test
 	public void test() {
-		WebElement dat = driver.findElement(By.id("test"));
+		WebElement dat = driver.findElement(By.className("StupidTestField"));
 		dat.clear();
 		dat.sendKeys("" + index);
 		driver.findElement(By.id("runTest")).click();
