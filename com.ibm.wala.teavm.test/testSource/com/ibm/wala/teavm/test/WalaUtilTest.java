@@ -15,6 +15,8 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -28,19 +30,23 @@ public class WalaUtilTest {
 	public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 	
 	@BeforeClass
-	public static void openBrowser() throws MalformedURLException{
-		DesiredCapabilities caps = DesiredCapabilities.firefox();
+	public static void openBrowser() throws MalformedURLException {
+		/*
+		DesiredCapabilities caps = DesiredCapabilities.chrome();
 		caps.setCapability("platform", "macOS 10.12");
-		caps.setCapability("version", "54.0");
+		caps.setCapability("version", "59.0");
 		String travisJobNumber = System.getenv("TRAVIS_JOB_NUMBER");
 		if (travisJobNumber != null && travisJobNumber.length() > 0) {
 			caps.setCapability("tunnel-identifier", travisJobNumber);
 			caps.setCapability("build", System.getenv("TRAVIS_BUILD_NUMBER"));
 		}
 		
-	    driver = new RemoteWebDriver(new URL(URL), caps);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	    driver = new RemoteWebDriver(new URL(URL), caps);*/
 		
+		driver = new PhantomJSDriver();
+
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
 		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
 	}
 

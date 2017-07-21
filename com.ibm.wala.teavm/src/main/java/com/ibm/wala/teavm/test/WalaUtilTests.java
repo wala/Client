@@ -81,7 +81,7 @@ public class WalaUtilTests {
 	}
 
 	private static boolean runTest(Test test) throws CancelException {
-		Console.log("running " + test.getClass().getName());
+		// Console.log("running " + test.getClass().getName());
 			test.test();
 			return true;
 	}
