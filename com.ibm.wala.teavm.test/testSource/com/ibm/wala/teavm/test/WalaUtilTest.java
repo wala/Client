@@ -35,12 +35,13 @@ public class WalaUtilTest {
 		String travisJobNumber = System.getenv("TRAVIS_JOB_NUMBER");
 		if (travisJobNumber != null && travisJobNumber.length() > 0) {
 			caps.setCapability("tunnel-identifier", travisJobNumber);
+			caps.setCapability("build", System.getenv("TRAVIS_BUILD_NUMBER"));
 		}
 		
 	    driver = new RemoteWebDriver(new URL(URL), caps);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/");
+		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
 	}
 
 	@AfterClass
