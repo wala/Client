@@ -46,7 +46,7 @@ public class WalaUtilTest {
 		
 		driver.manage().window().setSize(new Dimension(2048, 2048));
 		
-		driver.get("http://localhost:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
+		driver.get("http://127.0.0.1:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
 	}
 
 	@AfterClass
