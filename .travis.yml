@@ -19,3 +19,6 @@ install:
 script:
  - mvn clean install
 sudo: false
+cache:
+  directories:
+    - $HOME/.m2
