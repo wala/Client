@@ -1,5 +1,6 @@
 package com.ibm.wala.teavm.test;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,7 +47,8 @@ public class WalaUtilTest {
 		
 		driver.manage().window().setSize(new Dimension(2048, 2048));
 		
-		driver.get("http://127.0.0.1:8899/com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
+		File page = new File(new File(System.getProperty("user.dir")), "../com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
+		driver.get("file://" + page.getAbsolutePath());
 	}
 
 	@AfterClass
