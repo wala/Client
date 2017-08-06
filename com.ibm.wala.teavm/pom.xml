@@ -41,19 +41,19 @@
     <dependency>
       <groupId>com.ibm.wala</groupId>
       <artifactId>com.ibm.wala.util</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.4.4-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>com.ibm.wala</groupId>
       <artifactId>com.ibm.wala.core</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.4.4-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>com.ibm.wala</groupId>
       <artifactId>com.ibm.wala.core.tests</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.4.4-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -88,6 +88,7 @@
         <version>2.4</version>
         <configuration>
 	  <attachClasses>true</attachClasses>
+	  <classesClassifier>classes</classesClassifier>
           <webResources>
             <resource>
               <directory>${project.build.directory}/generated/js</directory>
@@ -143,5 +144,38 @@
       </plugin>
       
     </plugins>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>org.teavm</groupId>
+    								<artifactId>
+    									teavm-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[0.4.3,)
+    								</versionRange>
+    								<goals>
+    									<goal>compile</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 </project>
