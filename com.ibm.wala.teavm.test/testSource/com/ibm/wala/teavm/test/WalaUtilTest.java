@@ -19,43 +19,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 @RunWith(Parameterized.class)
-public class WalaUtilTest {
-	 
-	private static WebDriver driver;
-
-	public static final String USERNAME = System.getenv("SAUCE_USERNAME");
-	public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-	public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-	
-	@BeforeClass
-	public static void openBrowser() throws MalformedURLException {
-		/*
-		DesiredCapabilities caps = DesiredCapabilities.chrome();
-		caps.setCapability("platform", "macOS 10.12");
-		caps.setCapability("version", "59.0");
-		String travisJobNumber = System.getenv("TRAVIS_JOB_NUMBER");
-		if (travisJobNumber != null && travisJobNumber.length() > 0) {
-			caps.setCapability("tunnel-identifier", travisJobNumber);
-			caps.setCapability("build", System.getenv("TRAVIS_BUILD_NUMBER"));
-		}
-		
-	    driver = new RemoteWebDriver(new URL(URL), caps);*/
-		
-		driver = new PhantomJSDriver();
-		
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		driver.manage().window().setSize(new Dimension(2048, 2048));
-		
-		File page = new File(new File(System.getProperty("user.dir")), "../com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
-		driver.get("file://" + page.getAbsolutePath());
-	}
-
-	@AfterClass
-	public static void closeBrowser() {
-		driver.quit();
-	}
-
+public class WalaUtilTest extends WalaTeaVMTest {
+    static {
+	page = new File(System.getProperty("user.dir"), "../com.ibm.wala.teavm/target/com.ibm.wala.teavm-0.0.1-SNAPSHOT/index.html");
+    }
+    
 	private final int index;
 
 	public WalaUtilTest(int index) {
