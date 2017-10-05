@@ -1,7 +1,11 @@
 language: java
 jdk: oraclejdk8
+addons: # get google-chrome-stable
+  chrome: stable
 before_install:
  - git clone --depth=50 https://github.com/wala/WALA /tmp/WALA
+ - if [ ! -d chromedriver ]; then mkdir ~/chromedriver; wget -N https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip -P ~/chromedriver; unzip ~/chromedriver/chromedriver_linux64.zip -d ~/chromedriver; fi
+ - ~/chromedriver/chromedriver &
 install:
  - pushd /tmp/WALA
  - mvn clean install -DskipTests -B -q
@@ -12,3 +16,4 @@ sudo: false
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/chromedriver

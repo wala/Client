@@ -5,6 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>com.ibm.wala.teavm.test</name>
   <description>WALA TeaVM tests</description>
+  <packaging>jar</packaging>
+
   <build>
     <sourceDirectory>source</sourceDirectory>
     <testSourceDirectory>testSource</testSourceDirectory>
@@ -67,6 +69,18 @@
       </dependency>
     </dependencies>
   </plugin>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     	</plugins>
     </pluginManagement>
   </build>
@@ -103,8 +117,13 @@
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-chrome-driver</artifactId>
+      <version>3.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>3.4.0</version>
+      <version>3.6.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

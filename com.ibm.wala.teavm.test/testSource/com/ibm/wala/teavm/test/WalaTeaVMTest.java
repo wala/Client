@@ -1,7 +1,7 @@
 package com.ibm.wala.teavm.test;
 
 import java.io.File;
-import java.net.MalformedURLException;
+import java.net.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -12,11 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension; 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.*;
 
 public class WalaTeaVMTest {
 	 
@@ -41,9 +39,15 @@ public class WalaTeaVMTest {
 		}
 		
 	    driver = new RemoteWebDriver(new URL(URL), caps);*/
-		
-		driver = new PhantomJSDriver();
-		
+
+	    ChromeOptions options = new ChromeOptions();
+	    options.addArguments("--headless");
+	    options.addArguments("--allow-file-access-from-files");
+	    DesiredCapabilities cap = DesiredCapabilities.chrome();
+	    cap.setCapability(ChromeOptions.CAPABILITY, options);
+
+	    driver = new RemoteWebDriver(new URL("http://localhost:9515"), cap);
+
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		driver.manage().window().setSize(new Dimension(2048, 2048));
