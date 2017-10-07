@@ -41,7 +41,9 @@ public class WalaTeaVMTest {
 	    driver = new RemoteWebDriver(new URL(URL), caps);*/
 
 	    ChromeOptions options = new ChromeOptions();
-	    options.addArguments("--headless");
+	    if (System.getenv("USE_X") == null) {
+		options.addArguments("--headless");
+	    }
 	    options.addArguments("--allow-file-access-from-files");
 	    DesiredCapabilities cap = DesiredCapabilities.chrome();
 	    cap.setCapability(ChromeOptions.CAPABILITY, options);
