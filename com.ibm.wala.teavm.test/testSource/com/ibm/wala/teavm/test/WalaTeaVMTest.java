@@ -52,7 +52,7 @@ public class WalaTeaVMTest {
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		driver.manage().window().setSize(new Dimension(2048, 2048));
+		//driver.manage().window().setSize(new Dimension(2048, 2048));
 
 		assert page != null : "provide page for tests";
 		
