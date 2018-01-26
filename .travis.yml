@@ -1,7 +1,8 @@
+sudo: required
 language: java
 jdk: oraclejdk8
 addons: 
-  chrome: beta
+  chrome: stable
   apt:
     packages:
     - realpath
