@@ -1,6 +1,9 @@
 os: osx
 sudo: required
-language: java
+language: android
+android:
+  components:
+    - build-tools-26.0.2
 jdk: oraclejdk8
 addons: 
   chrome: stable
