@@ -11,7 +11,7 @@ addons:
     - xvfb
 before_install:
  - git clone --depth=50 https://github.com/wala/WALA /tmp/WALA
- - if [ ! -d ~/chromedriver ]; then mkdir ~/linuxchromedriver; wget -N https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/linuxchromedriver; yes | unzip ~/chromedriver/chromedriver_linux64.zip -d ~/linuxchromedriver; fi
+ - if [ ! -d ~/linuxchromedriver ]; then mkdir ~/linuxchromedriver; wget -N https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -P ~/linuxchromedriver; yes | unzip ~/chromedriver/chromedriver_linux64.zip -d ~/linuxchromedriver; fi
  - chmod a+x /home/travis/linuxchromedriver/chromedriver
  - /home/travis/linuxchromedriver/chromedriver &
 install:
